@@ -1,0 +1,298 @@
+/*
+	
+	Snippets to make creation of Headers painless &
+	some other Quality of Life features :D
+	
+	@credits:
+	> https://github.com/its_19818942118 for Snippets
+	> https://github.com/CrookedJ for awesome work on the Regex <3
+	
+*/
+
+{
+	
+	"Define Headers":
+	{
+		
+		"scope": "c, cpp , h , hpp",
+		"prefix":
+		[
+			"#hdef",
+			"hdef",
+		],
+		"isFileTemplate": true,
+		"description": "Creates Header Defines :D",
+		"body":
+		[
+			
+			"#ifndef ${1:${TM_FILENAME/^([A-za-z\\d]+)_?([A-Z][A-za-z\\d]+)?\\.([A-za-z\\d]+)$/${1:/upcase}_${2:/upcase}${2:+_}${3:/upcase}/}}",
+			"#define ${1:${TM_FILENAME/^([A-za-z\\d]+)_?([A-Z][A-za-z\\d]+)?\\.([A-za-z\\d]+)$/${1:/upcase}_${2:/upcase}${2:+_}${3:/upcase}/}}",
+			"/* #pragma once */",
+			"    ",
+			"    ${0:${0://Code}}",
+			"    ",
+			"#endif /* ${1:${TM_FILENAME/^([A-za-z\\d]+)_?([A-Z][A-za-z\\d]+)?\\.([A-za-z\\d]+)$/${1:/upcase}_${2:/upcase}${2:+_}${3:/upcase}/}} */"
+			
+		],
+		
+	},
+	
+	"Undefine Headers":
+	{
+		
+		"scope": "c , cpp , h , hpp",
+		"prefix":
+		[
+			"#hndef",
+			"hndef",
+		],
+		"isFileTemplate": true,
+		"description": "Creates Header Undefines :D",
+		"body":
+		[
+			
+			"#ifdef ${1:${TM_FILENAME/^([A-za-z\\d]+)_?([A-Z][A-za-z\\d]+)?\\.([A-za-z\\d]+)$/${1:/upcase}_${2:/upcase}${2:+_}${3:/upcase}/}}",
+			"#undef ${1:${TM_FILENAME/^([A-za-z\\d]+)_?([A-Z][A-za-z\\d]+)?\\.([A-za-z\\d]+)$/${1:/upcase}_${2:/upcase}${2:+_}${3:/upcase}/}}",
+			// "#pragma once",
+			"    ",
+			"    ${0:${0://Code}}",
+			"    ",
+			"#endif /* ${1:${TM_FILENAME/^([A-za-z\\d]+)_?([A-Z][A-za-z\\d]+)?\\.([A-za-z\\d]+)$/${1:/upcase}_${2:/upcase}${2:+_}${3:/upcase}/}} */"
+			
+		],
+		
+	},
+	
+	"Define Symbols":
+	{
+		
+		"scope": "c , cpp",
+		"prefix": "#define",
+		"description": "Creates indented #define Directive block :D",
+		"body":
+		[
+			
+			"#idefine ${1:SYMBOL}",
+			"    ",
+			"    ${0://Code}",
+			"    ",
+			
+		],
+		
+	},
+	
+	"Undefine Symbols":
+	{
+		
+		"scope": "c , cpp",
+		"prefix": "#undef",
+		"description": "Creates indented #undef Directive block :D",
+		"body":
+		[
+			
+			"#define ${1:SYMBOL}",
+			"    ",
+			"    ${0://Code}",
+			"    ",
+			
+		],
+		
+	},
+	
+	"Conditional Directives `#define`":
+	{
+		
+		"scope": "c , cpp",
+		"prefix": "#def",
+		"description": "Creates Header Defines :D",
+		"body":
+		[
+			
+			"#define ${1:SYMBOL}",
+			"${0://Code}",
+			
+		],
+		
+	},
+	
+	"Conditional Directives `#ifdef`":
+	{
+		
+		"scope": "c , cpp",
+		"prefix":
+		[
+			"ifdef",
+			"#ifdef",
+		],
+		"description": "Creates #ifdef statements :D",
+		"body":
+		[
+			
+			"#ifdef ${1:SYMBOL}",
+			"    ${0://Code}",
+			"#endif /* ${1:SYMBOL} */",
+			
+		],
+		
+	},
+	
+	"Creates region blocks `#region`":
+	{
+		
+		"scope": "c , cpp",
+		"prefix":
+		[
+			"region",
+			"#region",
+		],
+		"description": "Creates #region block statements :D",
+		"body":
+		[
+			
+			"#pragma region ${1:MARKER}",
+			"",
+			"/* #region ${1:MARKER} */",
+			"",
+			"    ${0://Code}",
+			"",
+			"/* #endregion ${1:MARKER} */",
+			"",
+			"#pragma endregion ${1:MARKER}",
+			
+		],
+		
+	},
+	
+	"main function `int main ( )`":
+	{
+		
+		"scope": "c , cpp",
+		"prefix":
+		[
+			"imain",
+			"imainv",
+			"intmain",
+		],
+		"description": "Creates the main function :D",
+		"body":
+		[
+			
+			"int",
+			"    main",
+			"    ( void )",
+			"{",
+			"    ",
+			"    ${0://Code}",
+			"    ",
+			"}",
+			
+		],
+		
+	},
+	
+	"Namespaces `namespace`":
+	{
+		
+		"scope": "c , cpp",
+		"prefix":
+		[
+			"namesp",
+			"namespace",
+		],
+		"description": "Creates namespace statements :D",
+		"body":
+		[
+			
+			"namespace",
+			"    ${1:Namespace}",
+			"{",
+			"    ",
+			"    ${0://Code}",
+			"    ",
+			"} /* namespace ${1:Namespace} */",
+			
+		],
+		
+	},
+	
+	"Void function define `void function ( ) { };`":
+	{
+		
+		"scope": "c , cpp",
+		"prefix":
+		[
+			"vfd",
+			"vdfd",
+			"voidfd",
+		],
+		"description": "Creates a void function :D",
+		"body":
+		[
+			
+			"void",
+			"    ${1:FUNCTION}",
+			"    ( ${2:void} )",
+			"{",
+			"    ",
+			"    ${0://Code}",
+			"    ",
+			"}",
+			
+		],
+		
+	},
+	
+	"Void function declaration `void function ( );`":
+	{
+		
+		"scope": "c , cpp",
+		"prefix":
+		[
+			"vf",
+			"vdf",
+			"voidf",
+		],
+		"description": "Creates a void function :D",
+		"body":
+		[
+			
+			"void",
+			"    ${1:FUNCTION}",
+			"    ( ${2:void} )",
+			";",
+			
+		],
+		
+	},
+	
+	"defines a ncurses initialization block!":
+	{
+		
+		"scope": "c , cpp",
+		"prefix":
+		[
+			"ncd",
+			"ncrsd",
+			"curses",
+			"ncurses",
+			"ncursesd",
+		],
+		"description": "Creates Ncurses initscr and endwin function :D",
+		"body":
+		[
+			
+			"initscr",
+			"    ( )",
+			";",
+			"    ",
+			"    ${0://Code}",
+			"    ",
+			"endwin",
+			"    ( )",
+			";",
+			
+		],
+		
+	},
+	
+}

@@ -1,0 +1,17 @@
+*
+
+!.vscode/
+!.vscode/**
+
+!src/
+!src/**
+
+!docs/
+!docs/**
+
+!include/
+!include/**
+
+!README.md
+!.gitignore
+!CMakeLists.txt

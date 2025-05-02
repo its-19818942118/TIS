@@ -76,4 +76,9 @@
         std::variant <e_pkgOpt_t , str_v>
     ;
     
+    using
+      tuple3Str =
+        std::tuple <str , str , str>
+    ;
+    
 #endif /* TYPE_ALIASES_HPP */

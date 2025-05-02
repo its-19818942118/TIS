@@ -12,14 +12,14 @@
     #include <spdlog/spdlog.h>
     #include <spdlog/sinks/stdout_color_sinks.h>
     
-    #include "Namespaces.hpp"
     #include "typeAliases.hpp"
     
     namespace
         TIS::logger
     {
         
-        enum class
+        enum
+          class
             logLevel
             {
                 
@@ -32,7 +32,8 @@
             }
         ;
         
-        enum class
+        enum
+          class
             funcLevel
             {
                 
@@ -46,10 +47,29 @@
             }
         ;
         
-        extern const
+        std::string
+            funcLevelStr /* Function to convert functionLevels to string */
+            ( funcLevel fnLevel )
+        ;
+        
+        extern
+          const
           std::unordered_map /* unordered map type to validate log combos */
           <logger::logLevel , logger::funcLevelSt>
             validLogCombos
+        ;
+        
+        struct
+            logMessage
+            {
+                
+                std::optional
+                  <std::string_view>
+                    message
+                    { std::nullopt }
+                ;
+                
+            }
         ;
         
         void
@@ -79,9 +99,6 @@
                 Args &&
                     ...
                 args
-                // const
-                //     logMessage&
-                // msgLog
             )
         {
             
@@ -154,38 +171,74 @@
                     info_pattern =
                     {
                         "\e[36m \e[0m[\e[0;1;36m%l\e[0m] ⨳ [%H:%M:%S]\e[36m\n"
-                        "∟ ⁂ ⤷ \e[1m%n\e[0;36m\n "
-                        "∟ ⁂ ⧻∷⟝⟶ \e[0;3;97m\"%v\"\e[0m"
+                        "∟  ⤷ \e[1m%n\e[0;36m\n "
+                        "∟ ∷⇒⇢ \e[0;3;97m\"%v\"\e[0m"
                     } ,
                     
                     debug_pattern =
                     {
                         "\e[34m \e[0m[\e[0;1;34m%l\e[0m] ⨳ [%H:%M:%S]\e[34m\n"
-                        "∟ ⁂ ⤷ \e[1m%n\e[0;34m\n "
-                        "∟ ⁂ ⧻∷⟝⟶ \e[0;3;97m\"%v\"\e[0m"
+                        "∟  ⤷ \e[1m%n\e[0;34m\n "
+                        "∟ ∷⇒⇢ \e[0;3;97m\"%v\"\e[0m"
                     } ,
                     
                     error_pattern =
                     {
                         "\e[31m \e[0m[\e[0;1;31m%l\e[0m] ⨳ [%H:%M:%S]\e[31m\n"
-                        "∟ ⁂ ⤷ \e[1m%n\e[0;31m\n "
-                        "∟ ⁂ ⧻∷⟝⟶ \e[0;3;97m\"%v\"\e[0m"
+                        "∟  ⤷ \e[1m%n\e[0;31m\n "
+                        "∟ ∷⇒⇢ \e[0;3;97m\"%v\"\e[0m"
                     } ,
                     
                     warning_pattern =
                     {
                         "\e[33m \e[0m[\e[0;1;33m%l\e[0m] ⨳ [%H:%M:%S]\e[33m\n"
-                        "∟ ⁂ ⤷ \e[1m%n\e[0;33m\n "
-                        "∟ ⁂ ⧻∷⟝⟶ \e[0;3;97m\"%v\"\e[0m"
+                        "∟  ⤷ \e[1m%n\e[0;33m\n "
+                        "∟ ∷⇒⇢ \e[0;3;97m\"%v\"\e[0m"
                     } ,
                     
                     trace_pattern =
                     {
                         "\e[35m \e[0m[\e[0;1;35m%l\e[0m] ⨳ [%H:%M:%S]\e[35m\n"
-                        "∟ ⁂ ⤷ \e[1m%n\e[0;35m\n "
-                        "∟ ⁂ ⧻∷⟝⟶ \e[0;3;97m\"%v\"\e[0m"
+                        "∟  ⤷ \e[1m%n\e[0;35m\n "
+                        "∟ ∷⇒⇢ \e[0;3;97m\"%v\"\e[0m"
                     }
                 ;
+                
+            //     info_pattern =
+            //     {
+            //         "\e[36m \e[0m[\e[0;1;36m%l\e[0m] ⨳ [%H:%M:%S]\e[36m\n"
+            //         "∟ ⁂ ⤷ \e[1m%n\e[0;36m\n "
+            //         "∟ ⁂ ⧻∷⟝⟶ \e[0;3;97m\"%v\"\e[0m"
+            //     } ,
+                
+            //     debug_pattern =
+            //     {
+            //         "\e[34m \e[0m[\e[0;1;34m%l\e[0m] ⨳ [%H:%M:%S]\e[34m\n"
+            //         "∟ ⁂ ⤷ \e[1m%n\e[0;34m\n "
+            //         "∟ ⁂ ⧻∷⟝⟶ \e[0;3;97m\"%v\"\e[0m"
+            //     } ,
+                
+            //     error_pattern =
+            //     {
+            //         "\e[31m \e[0m[\e[0;1;31m%l\e[0m] ⨳ [%H:%M:%S]\e[31m\n"
+            //         "∟ ⁂ ⤷ \e[1m%n\e[0;31m\n "
+            //         "∟ ⁂ ⧻∷⟝⟶ \e[0;3;97m\"%v\"\e[0m"
+            //     } ,
+                
+            //     warning_pattern =
+            //     {
+            //         "\e[33m \e[0m[\e[0;1;33m%l\e[0m] ⨳ [%H:%M:%S]\e[33m\n"
+            //         "∟ ⁂ ⤷ \e[1m%n\e[0;33m\n "
+            //         "∟ ⁂ ⧻∷⟝⟶ \e[0;3;97m\"%v\"\e[0m"
+            //     } ,
+                
+            //     trace_pattern =
+            //     {
+            //         "\e[35m \e[0m[\e[0;1;35m%l\e[0m] ⨳ [%H:%M:%S]\e[35m\n"
+            //         "∟ ⁂ ⤷ \e[1m%n\e[0;35m\n "
+            //         "∟ ⁂ ⧻∷⟝⟶ \e[0;3;97m\"%v\"\e[0m"
+            //     }
+            // ;
                 
                 switch
                     ( lgLevel )

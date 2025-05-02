@@ -12,14 +12,14 @@
         
         
         using
-            optPkgType_t =
-              std::optional
+          optPkgType_t =
+            std::optional
             <TIS::e_pkgType>
         ;
         
         using
-            optPkgTypeVectStr_t =
-              std::pair
+          optPkgTypeVectStr_t =
+            std::pair
             <vectStr_t , optPkgType_t>
         ;
         

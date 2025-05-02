@@ -1,12 +1,14 @@
 #include <cstdlib>
 #include <iostream>
+#include <variant>
 #include <optional>
 #include <type_traits>
 
 #include "logger.hpp"
 #include "installer.hpp"
-#include "Namespaces.hpp"
 #include "packageTypes.hpp"
+#include "typeAliases.hpp"
+#include "packagesString.hpp"
 
 namespace
     TIS
@@ -76,17 +78,17 @@ namespace
                     {
                         
                         using
-                            T =
+                          T =
                             std::decay_t <decltype ( arg )>
                         ;
                         
                         using
-                            compareVec_t =
+                          compareVec_t =
                             std::is_same <T , vectStr_t>
                         ;
                         
                         using
-                            compareStrInit_t =
+                          compareStrInit_t =
                             std::is_same <T , strInitList>
                         ;
                         
@@ -129,16 +131,30 @@ namespace
                 )
             ;
             
+            vectStr_t test = {"sine package test"};
+            
+            str pkg = packagesString(e_pkgTypeStr::PAC, test);
+            
+            std::cout
+            
+                <<  "ruinnig command"
+                <<  pkg
+            ;
+            
+            system
+                (
+                    pkg.c_str()
+                    
+                )
+            ;
+            
             for
                 ( const auto& pkgs : packages )
             {
                 
-                // packages.push_back ( pkgs );
+                packages.push_back ( pkgs );
                 
-                auto
-                    command =
-                    "sudo pacman -S " + pkgs
-                ;
+                packagesString(e_pkgTypeStr::PAC, pkgsLst);
                 
                 logger::spdLog
                     (
@@ -148,10 +164,6 @@ namespace
                         pkgs
                     )
                 ;
-                
-                // system
-                //     ( command.c_str ( ) )
-                // ;
                 
             }
             

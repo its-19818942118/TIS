@@ -10,7 +10,6 @@ namespace
     TIS
 {
     
-    
     std::vector <std::string>
         definePackages
         (

@@ -3,8 +3,11 @@
 #include <spdlog/spdlog.h>
 
 #include "logger.hpp"
+// #include "installer.hpp"
+#include "validator.hpp"
 #include "argsParser.hpp"
-#include "Namespaces.hpp"
+#include "typeAliases.hpp"
+// #include "packageTypes.hpp"
 
 using
     TIS::logger::spdLog ,
@@ -14,15 +17,17 @@ using
 
 int
     TIS::validator
-    ( int argc , char* argv [ ] )
+    ( int argc , char** argv )
 {
     
     if
-        ( argc == 1 )
+        ( argc < 2 )
     {
         
         spdlog::set_level(spdlog::level::trace);
         
+         printf("from validator Number of arguments: %d\n", argc);
+         
         spdLog
             (
                 logLevel::ERROR ,
@@ -41,12 +46,12 @@ int
             )
         ;
         
-        TIS::ArgsParser
+        ArgsParser parser
             ( argc , argv )
         ;
         
         system
-            ( "read" )
+            ( "read" ) // we are here works 
         ;
         
         exit
@@ -55,6 +60,14 @@ int
         
     }
     
-    return 0;
+    else
+    {
+        
+        ArgsParser parser ( argc , argv )
+        ;
+        
+    }
     
+    return 0;
+    // works uptil here
 }

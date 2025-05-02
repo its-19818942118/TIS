@@ -1,2 +1,3 @@
 # TIS
-`#ff000`
+
+## Thalia ( Terminal Installer Instruction Sets )

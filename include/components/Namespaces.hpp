@@ -2,11 +2,10 @@
 #define NAMESPACES_HPP
 /* #pragma once */
     
-    #include <tuple>
     #include <string>
     #include <vector>
     #include <optional>
-    #include <string_view>
+    // #include <string_view>
     #include <unordered_map>
     #include <unordered_set>
     
@@ -27,16 +26,20 @@
             validPkgTypeCombos
         ;
         
-        std::tuple
-          <vectStr_t , vectStr_t , vectStr_t>
-            packagesStr
-            ( )
-        ;
-        
-        std::tuple
-          <str , str , str>
+        std::variant
+          <tuple3Str , str>
             packagesString
-            ( )
+            (
+                TIS::e_pkgTypeStr
+                    pkgType =
+                { } ,
+                v_strInitList
+                    pkgsLst =
+                { } ,
+                bool
+                    returnall =
+                false
+            )
         ;
         
         std::vector <std::string>
@@ -48,6 +51,16 @@
                 strInitList
                     pkgsLst =
                 { }
+            )
+        ;
+        
+        void
+            execCommand
+            (
+                const
+                std::variant
+                    <tuple3Str , str> &
+                command
             )
         ;
         
@@ -72,7 +85,7 @@
         
         int
             validator /* validate given arguments */
-            ( int argc , char* argv [ ] )
+            ( int argc , char** argv )
         ;
         
         namespace
@@ -92,11 +105,6 @@
                 ( logLevel lgLevel )
             ;
             
-            std::string
-                funcLevelStr /* Function to convert functionLevels to string */
-                ( funcLevel fnLevel )
-            ;
-            
             using
               funcLevelSt = /* unordered set type for functionLevels */
                 std::unordered_set
@@ -111,15 +119,6 @@
             
             struct
                 logMessage /* struct type to add a log message */
-                {
-                    
-                    std::optional
-                      <std::string_view>
-                        message
-                        { std::nullopt }
-                    ;
-                    
-                }
             ;
             
             void

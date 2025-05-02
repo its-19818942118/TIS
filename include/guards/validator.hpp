@@ -8,7 +8,7 @@
         
         int
             validator
-            ( int argc , char * argv [ ] )
+            ( int argc , char** argv )
         ;
         
     } /* namespace TIS */

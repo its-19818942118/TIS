@@ -13,7 +13,6 @@
         void
             Installer /* void function to handle Installation */
             (
-                
                 std::optional
                   <v_boolsv>
                     outstream ,
@@ -21,7 +20,6 @@
                     pkgsType ,
                 v_strInitList
                     pkgsLst
-                
             )
         ;
         

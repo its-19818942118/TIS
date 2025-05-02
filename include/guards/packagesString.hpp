@@ -2,16 +2,29 @@
 #define PACKAGES_STRING_HPP
 /* #pragma once */
     
+    // #include <variant>
+    
     #include "typeAliases.hpp"
     
     namespace
         TIS
     {
         
-        std::tuple
-          <str , str , str>
+        // std::variant
+        //   <tuple3Str , str> // this no worky
+        std::string
             packagesString
-            ( )
+            (
+                e_pkgTypeStr
+                    pkgType /* =
+                { }  */,
+                v_strInitList
+                    pkgsLst /* =
+                { }  */
+                // bool
+                //     returnall /* =
+                // false */
+            )
         ;
         
     } /* namespace TIS */
